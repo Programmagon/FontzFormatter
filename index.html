@@ -1,104 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Generator</title>
+    <title>Cyberpunk Font Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-color: #f4f4f9;
-            --card-bg: #ffffff;
-            --text-main: #333333;
-            --accent: #6366f1;
-            --accent-hover: #4f46e5;
+            --neon-pink: #ff00ff;
+            --neon-purple: #b026ff;
+            --neon-cyan: #00f3ff;
+            --dark-bg: #0b0114;
+            --glass-bg: rgba(255, 0, 255, 0.05);
+            --glass-border: rgba(255, 0, 255, 0.2);
+            --text-color: #fce8ff;
         }
 
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            max-width: 800px;
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--dark-bg);
+            /* Cyberpunk Grid Background */
+            background-image: 
+                linear-gradient(var(--glass-border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--glass-border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: var(--text-color);
+            max-width: 900px;
             margin: 0 auto;
             padding: 2rem;
+            min-height: 100vh;
         }
 
         h1 {
             text-align: center;
+            font-size: 3rem;
             margin-bottom: 2rem;
+            color: #fff;
+            text-shadow: 0 0 5px var(--neon-pink), 0 0 15px var(--neon-pink), 0 0 30px var(--neon-purple);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .input-container {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
         }
 
+        /* Glassmorphism Input */
         input[type="text"] {
             width: 100%;
-            padding: 1rem;
-            font-size: 1.25rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 1.2rem;
+            font-size: 1.5rem;
+            font-family: inherit;
+            color: #fff;
+            background: rgba(11, 1, 20, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--neon-cyan);
+            border-radius: 12px;
             box-sizing: border-box;
             outline: none;
-            transition: border-color 0.2s;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            transition: all 0.3s ease;
         }
 
         input[type="text"]:focus {
-            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--neon-cyan), inset 0 0 10px rgba(0, 243, 255, 0.2);
+            border-color: #fff;
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.4);
         }
 
         #results {
             display: grid;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
+        /* Glassmorphism Cards */
         .font-card {
-            background-color: var(--card-bg);
-            padding: 1.25rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            border-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 0 15px rgba(255, 0, 255, 0.02);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .font-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(176, 38, 255, 0.2), inset 0 0 15px rgba(255, 0, 255, 0.1);
+            border-color: var(--neon-purple);
+        }
+
+        .font-label {
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: var(--dark-bg);
+            padding: 0 8px;
+            font-size: 0.8rem;
+            color: var(--neon-cyan);
+            letter-spacing: 1px;
+            border: 1px solid var(--neon-cyan);
+            border-radius: 4px;
+        }
+
+        .font-card {
+            position: relative;
         }
 
         .font-text {
-            font-size: 1.25rem;
+            /* Standard-Schriftart für die Generierung, damit Unicode nicht verfälscht wird */
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 1.4rem;
             word-break: break-all;
             flex-grow: 1;
+            padding-top: 5px;
         }
 
+        /* Cyberpunk Button */
         .copy-btn {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
+            background: transparent;
+            color: var(--neon-pink);
+            border: 2px solid var(--neon-pink);
+            padding: 0.6rem 1.2rem;
             border-radius: 6px;
             cursor: pointer;
-            font-weight: 600;
-            transition: background-color 0.2s;
+            font-size: 1.1rem;
+            font-family: inherit;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.2s;
             white-space: nowrap;
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
         }
 
         .copy-btn:hover {
-            background-color: var(--accent-hover);
+            background: var(--neon-pink);
+            color: #fff;
+            box-shadow: 0 0 20px var(--neon-pink);
         }
 
         /* Toast Notification */
         #toast {
             visibility: hidden;
-            min-width: 200px;
-            background-color: #333;
+            min-width: 250px;
+            background: rgba(0, 243, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--neon-cyan);
             color: #fff;
             text-align: center;
             border-radius: 8px;
             padding: 16px;
             position: fixed;
-            z-index: 1;
+            z-index: 100;
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
-            font-size: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
             opacity: 0;
             transition: opacity 0.3s, bottom 0.3s;
         }
@@ -108,42 +178,68 @@
             opacity: 1;
             bottom: 50px;
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-purple);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-pink);
+        }
     </style>
 </head>
 <body>
 
-    <h1>✨ Text Font Generator</h1>
+    <h1>[ TEXT_GENERATOR_V2.0 ]</h1>
     
     <div class="input-container">
-        <input type="text" id="userInput" placeholder="Type your text here..." autocomplete="off">
+        <input type="text" id="userInput" placeholder="> Text hier eingeben..." autocomplete="off">
     </div>
 
     <div id="results">
         </div>
 
-    <div id="toast">Copied to clipboard!</div>
+    <div id="toast">SYSTEM: IN ZWISCHENABLAGE KOPIERT</div>
 
     <script>
-        // The standard alphabet
+        // Das Standard-Alphabet (52 Zeichen)
         const normalChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        // Unicode mapping dictionaries
+        // Umfassende Liste von Unicode-Mappings (Jedes exakt 52 Zeichen lang)
         const fonts = [
-            { name: "Bold", chars: "𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭" },
-            { name: "Italic", chars: "𝘢𝘣𝘤𝘥𝘦𝘧𝘨𝘩𝘪𝘫𝘬𝘭𝘮𝘯𝘰𝘱𝘲𝘳𝘴𝘵𝘶𝘷𝘸𝘹𝘺𝘻𝘈𝘉𝘊𝘋𝘌𝘍𝘎𝘏𝘐𝘑𝘒𝘓𝘔𝘕𝘖𝘗𝘘𝘙𝘚𝘛𝘜𝘝𝘞𝘟𝘠𝘡" },
-            { name: "Cursive", chars: "𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝔀𝔁𝔂𝔃𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩" },
-            { name: "Fraktur", chars: "𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷𝔄𝔅𝔆𝔇𝔈𝔉𝔊𝔋ℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ" },
-            { name: "Monospace", chars: "𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚜𝚝𝚞𝚟𝚠𝚡𝚢𝚣𝙰𝙱𝙲𝙳𝙴𝙵𝙶𝙷𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙿𝚀𝚁𝚂𝚃𝚄𝚅𝚆𝚇𝚈𝚉" },
-            { name: "Double Struck", chars: "𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ" }
+            { name: "SANS BOLD", chars: "𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇𝗔𝗕𝗖𝗗𝗘𝗙𝗚𝗛𝗜𝗝𝗞𝗟𝗠𝗡𝗢𝗣𝗤𝗥𝗦𝗧𝗨𝗩𝗪𝗫𝗬𝗭" },
+            { name: "SANS ITALIC", chars: "𝘢𝘣𝘤𝘥𝘦𝘧𝘨𝘩𝘪𝘫𝘬𝘭𝘮𝘯𝘰𝘱𝘲𝘳𝘴𝘵𝘶𝘷𝘸𝘹𝘺𝘻𝘈𝘉𝘊𝘋𝘌𝘍𝘎𝘏𝘐𝘑𝘒𝘓𝘔𝘕𝘖𝘗𝘘𝘙𝘚𝘛𝘜𝘝𝘞𝘟𝘠𝘡" },
+            { name: "SANS BOLD ITALIC", chars: "𝙖𝙗𝙘𝙙𝙚𝙛𝙜𝙝𝙞𝙟𝙠𝙡𝙢𝙣𝙤𝙥𝙦𝙧𝙨𝙩𝙪𝙫𝙬𝙭𝙮𝙯𝘼𝘽𝘾𝘿𝙀𝙁𝙂𝙃𝙄𝙅𝙆𝙇𝙈𝙉𝙊𝙋𝙌𝙍𝙎𝙏𝙐𝙑𝙒𝙓𝙔𝙕" },
+            { name: "SERIF BOLD", chars: "𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙" },
+            { name: "SERIF ITALIC", chars: "𝑎𝑏𝑐𝑑𝑒𝑓𝑔ℎ𝑖𝑗𝑘𝑙𝑚𝑛𝑜𝑝𝑞𝑟𝑠𝑡𝑢𝑣𝑤𝑥𝑦𝑧𝐴𝐵𝐶𝐷𝐸𝐹𝐺𝐻𝐼𝐽𝐾𝐿𝑀𝑁𝑂𝑃𝑄𝑅𝑆𝑇𝑈𝑉𝑊𝑋𝑌𝑍" },
+            { name: "SERIF BOLD ITALIC", chars: "𝒂𝒃𝒄𝒅𝒆𝒇𝒈𝒉𝒊𝒋𝒌𝒍𝒎𝒏𝒐𝒑𝒒𝒓𝒔𝒕𝒖𝒗𝒘𝒙𝒚𝒛𝑨𝑩𝑪𝑫𝑬𝑭𝑮𝑯𝑰𝑱𝑲𝑳𝑴𝑵𝑶𝑷𝑸𝑹𝑺𝑻𝑼𝑽𝑾𝑿𝒀𝒁" },
+            { name: "SCRIPT / CURSIVE", chars: "𝒶𝒷𝒸𝒹ℯ𝒻ℊ𝒽𝒾𝒿𝓀𝓁𝓂𝓃ℴ𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏𝒜ℬ𝒞𝒟ℰℱ𝒢ℋℐ𝒥𝒦ℒℳ𝒩𝒪𝒫𝒬ℛ𝒮𝒯𝒰𝒱𝒲𝒳𝒴𝒵" },
+            { name: "SCRIPT BOLD", chars: "𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝔀𝔁𝔂𝔃𝓐𝓑𝓒𝓓𝓔𝓕𝓖𝓗𝓘𝓙𝓚𝓛𝓜𝓝𝓞𝓟𝓠𝓡𝓢𝓣𝓤𝓥𝓦𝓧𝓨𝓩" },
+            { name: "FRAKTUR / GOTHIC", chars: "𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷𝔄𝔅𝔆𝔇𝔈𝔉𝔊𝔋ℑ𝔍𝔎𝔏𝔐𝔑𝔒𝔓𝔔ℜ𝔖𝔗𝔘𝔙𝔚𝔛𝔜ℨ" },
+            { name: "FRAKTUR BOLD", chars: "𝖆𝖇𝖈𝖉𝖊𝖋𝖌𝖍𝖎𝖏𝖐𝖑𝖒𝖓𝖔𝖕𝖖𝖗𝖘𝖙𝖚𝖛𝖜𝖝𝖞𝖟𝕬𝕭𝕮𝕯𝕰𝕱𝕲𝕳𝕴𝕵𝕶𝕷𝕸𝕹𝕺𝕻𝕼𝕽𝕾𝕿𝖀𝖁𝖂𝖃𝖄𝖅" },
+            { name: "MONOSPACE", chars: "𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚜𝚝𝚞𝚟𝚠𝚡𝚢𝚣𝙰𝙱𝙲𝙳𝙴𝙵𝙶𝙷𝙸𝙹𝙺𝙻𝙼𝙽𝙾𝙿𝚀𝚁𝚂𝚃𝚄𝚅𝚆𝚇𝚈𝚉" },
+            { name: "DOUBLE STRUCK", chars: "𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫𝔸𝔹ℂ𝔻𝔼𝔽𝔾ℍ𝕀𝕁𝕂𝕃𝕄ℕ𝕆ℙℚℝ𝕊𝕋𝕌𝕍𝕎𝕏𝕐ℤ" },
+            { name: "VAPORWAVE / WIDE", chars: "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺ" },
+            { name: "BUBBLES / CIRCLED", chars: "ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏ" },
+            { name: "DARK BUBBLES", chars: "🅐🅑🅒🅓🅔🅕🅖🅗🅘🅙🅚🅛🅜🅝🅞🅟🅠🅡🅢🅣🅤🅥🅦🅧🅨🅩🅐🅑🅒🅓🅔🅕🅖🅗🅘🅙🅚🅛🅜🅝🅞🅟🅠🅡🅢🅣🅤🅥🅦🅧🅨🅩" },
+            { name: "SQUARED", chars: "🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉🄰🄱🄲🄳🄴🄵🄶🄷🄸🄹🄺🄻🄼🄽🄾🄿🅀🅁🅂🅃🅄🅅🅆🅇🅈🅉" },
+            { name: "DARK SQUARED", chars: "🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉" },
+            { name: "SMALL CAPS", chars: "ᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ" }
         ];
 
         const userInput = document.getElementById('userInput');
         const resultsContainer = document.getElementById('results');
         const toast = document.getElementById('toast');
 
-        // Function to translate standard text to unicode text
+        // Umwandlungsfunktion
         function transformText(text, targetChars) {
-            // Array.from is used to safely split Unicode surrogate pairs
             const targetArray = Array.from(targetChars);
             let result = '';
             
@@ -151,7 +247,6 @@
                 let char = text[i];
                 let index = normalChars.indexOf(char);
                 
-                // If it's a letter, swap it. Otherwise, keep original (like spaces, numbers)
                 if (index !== -1) {
                     result += targetArray[index];
                 } else {
@@ -161,51 +256,51 @@
             return result;
         }
 
-        // Function to render the UI updates
+        // Generiert die UI-Karten
         function generateFonts() {
             const text = userInput.value;
             resultsContainer.innerHTML = '';
 
-            // If input is empty, show nothing
             if (!text) return;
 
             fonts.forEach(font => {
                 const translatedText = transformText(text, font.chars);
                 
-                // Create card container
                 const card = document.createElement('div');
                 card.className = 'font-card';
                 
-                // Create text span
+                const label = document.createElement('div');
+                label.className = 'font-label';
+                label.innerText = font.name;
+
                 const textSpan = document.createElement('span');
                 textSpan.className = 'font-text';
                 textSpan.innerText = translatedText;
                 
-                // Create copy button
                 const copyBtn = document.createElement('button');
                 copyBtn.className = 'copy-btn';
-                copyBtn.innerText = 'Copy';
+                copyBtn.innerText = 'COPY';
                 copyBtn.onclick = () => copyToClipboard(translatedText);
                 
+                card.appendChild(label);
                 card.appendChild(textSpan);
                 card.appendChild(copyBtn);
                 resultsContainer.appendChild(card);
             });
         }
 
-        // Function to copy text and show toast notification
+        // Copy & Toast Funktion
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 toast.className = "show";
                 setTimeout(() => { 
                     toast.className = toast.className.replace("show", ""); 
-                }, 2500);
+                }, 2000);
             }).catch(err => {
-                console.error('Failed to copy: ', err);
+                console.error('Copy Failed: ', err);
             });
         }
 
-        // Listen for typing events
         userInput.addEventListener('input', generateFonts);
     </script>
 </body>
