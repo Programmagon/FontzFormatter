@@ -3,13 +3,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const outputList = document.getElementById('output-list');
 
   // Friendly names for the display UI
+  // Friendly names for the display UI
   const styleNames = {
     bold: 'Bold Serif',
     italic: 'Italic Serif',
-    doubleStruck: 'Double Struck (Blackboard)',
+    boldItalic: 'Bold Italic Serif',
     script: 'Script / Cursive',
+    scriptBold: 'Bold Script',
     fraktur: 'Fraktur (Gothic)',
-    monospace: 'Monospace'
+    frakturBold: 'Bold Fraktur',
+    doubleStruck: 'Double Struck (Blackboard)',
+    sansSerif: 'Sans-Serif',
+    sansBold: 'Bold Sans-Serif',
+    sansItalic: 'Italic Sans-Serif',
+    sansBoldItalic: 'Bold Italic Sans-Serif',
+    monospace: 'Monospace',
+    vaporwave: 'V A P O R W A V E',
+    squared: 'Squared Outline',
+    circledDark: 'Dark Circles',
+    circledLight: 'Light Circles',
+    smallCaps: 'Small Caps',
+    upsideDown: 'Upside Down',
+    glitch: 'C O R R U P T E D // GLITCH'
   };
 
   // Build output card elements
