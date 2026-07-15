@@ -70,26 +70,6 @@ const UnicodeLibrary = (() => {
   function convertMappedChar(char, mapString) {
     const index = standardChars.indexOf(char);
     if (index !== -1) {
-        // Handle surrogate pairs in strings (for emojis/complex unicode)
-        const array = Array.from(mapString); 
-        return array[index] || char;
-    }
-    return char;
-  }
-
-  function translate(text, style) {
-    if (style === 'glitch') return applyGlitch(text);
-
-    if (offsetMaps[style]) {
-      return text.split('').map(char => convertOffsetChar(char, offsetMaps[style])).join('');
-    }
-
-    if (charMaps[style]) {
-      let result = text.split('').map(char => convertMappedChar(char, charMaps[style])).join('');
-      // Special logic for upside down: reverse the string
-      if (style === 'upsideDown') result = result.split('').reverse().join('');
-      return result;
-    }
 
     return text;
   }
