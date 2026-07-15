@@ -35,7 +35,9 @@ const UnicodeLibrary = (() => {
     // sᴍᴀʟʟ ᴄᴀᴘs
     smallCaps: "ABCDEFGHIJKLMNOPQRSTUVWXYZᴀʙᴄᴅᴇғɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ0123456789",
     // uʍopǝpısdn (Upside Down)
-    upsideDown: "∀𐐒ƆᗡƎℲ⅁HIſʞ˥WNOԀΌᴚS⊥∩ΛMX⅄Zɐqɔpǝɟƃɥıɾʞlɯuodbɹsʇnʌʍxʎz0ƖᄅƐㄣϛ9ㄥ86"
+    upsideDown: "∀𐐒ƆᗡƎℲ⅁HIſʞ˥WNOԀΌᴚS⊥∩ΛMX⅄Zɐqɔpǝɟƃɥıɾʞlɯuodbɹsʇnʌʍxʎz0ƖᄅƐㄣϛ9ㄥ86",
+    // Neo-Tokyo (Faux Asian / Kanji-Style)
+    fauxAsian: "卂乃匚刀巨下厶卄工丁长乚爪几口尸Ｑ尺丂丅凵Ｖ山乂丫乙卂乃匚刀巨下厶卄工丁长乚爪几口尸ｑ尺丂丅凵ｖ山乂丫乙０１２３４５６７８９"
   };
 
   const standardChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
