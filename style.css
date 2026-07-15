@@ -1,4 +1,8 @@
-/* Custom properties for the theme */
+/* ==========================================================================
+   CYBER_FONT // ULTIMATE UNICODE CONVERTER STYLESHEET
+   ========================================================================== */
+
+/* Theme Variables */
 :root {
   --bg-color: #080312;
   --panel-bg: rgba(13, 6, 28, 0.45);
@@ -10,6 +14,7 @@
   --text-dim: #8b7ca2;
 }
 
+/* Global Reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -17,11 +22,13 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-/* --- Layout & Scroll-Control (App-Look) --- */
+/* --- App Layout & Scroll-Control --- */
 html, body {
   height: 100vh;
   width: 100vw;
-  overflow: hidden; /* Verhindert das Scrollen der gesamten Seite */
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Verhindert das globale Scrollen der Hintergrundseite */
   background-color: var(--bg-color);
   color: var(--text-primary);
 }
@@ -30,20 +37,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-/* Zentraler Container, der sich perfekt einpasst */
+/* Zentraler Container (90% der Bildschirmhöhe) */
 .container {
   width: 100%;
   max-width: 800px;
-  height: 95vh; /* Lässt oben und unten etwas Luft */
+  height: 90vh; 
   display: flex;
   flex-direction: column;
   padding: 10px;
   z-index: 1;
 }
 
-/* Die Glass-Panel umschließt alles und wächst dynamisch */
+/* Das Glassmorphism-Panel (hält alles fest umschlossen) */
 .glass-panel {
   background: var(--panel-bg);
   backdrop-filter: blur(15px);
@@ -57,26 +65,17 @@ body {
   
   display: flex;
   flex-direction: column;
-  height: 100%; /* Füllt die Container-Höhe aus */
-  overflow: hidden; /* Verhindert, dass das Panel selbst ausbricht */
+  height: 100%;       /* Füllt den Container komplett aus */
+  min-height: 0;      /* Zwingt Flex-Kinder im Browser dazu, schrumpfen zu können */
+  overflow: hidden;   /* Schützt das Panel vor Ausbrüchen */
 }
 
-/* --- Scrollbarer Output-Bereich --- */
-#output-list, .output-list {
-  flex: 1;                /* Nutzt den gesamten restlichen Platz im Glaskasten */
-  overflow-y: auto;       /* NUR HIER wird gescrollt */
-  overflow-x: hidden;
-  padding-right: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  
-  /* Performance-Boost für ruckelfreies Scrollen mit blur-Effekt */
-  will-change: transform;
-  -webkit-overflow-scrolling: touch;
+/* Verhindert, dass Header und Input zusammengedrückt werden */
+header, .input-group {
+  flex-shrink: 0;
 }
 
-/* --- Background details --- */
+/* --- Animated Cyberpunk Background --- */
 .cyber-bg {
   position: fixed;
   top: 0;
@@ -105,11 +104,10 @@ body {
   pointer-events: none;
 }
 
-/* --- Header & Typography --- */
+/* --- Header & Branding --- */
 header {
   text-align: center;
   margin-bottom: 20px;
-  flex-shrink: 0; /* Header darf nicht schrumpfen */
 }
 
 .neon-text {
@@ -133,10 +131,9 @@ header {
   text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
 }
 
-/* --- Inputs --- */
+/* --- Input Elements --- */
 .input-group {
   margin-bottom: 20px;
-  flex-shrink: 0; /* Input-Bereich darf nicht schrumpfen */
 }
 
 .cyber-label {
@@ -167,7 +164,23 @@ textarea:focus {
   box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
 }
 
-/* --- Custom Scrollbar --- */
+/* --- SCROLL-CONTAINER (The Magic Fix) --- */
+#output-list, .output-list {
+  flex: 1;            /* Nutzt den kompletten restlichen Platz im Panel */
+  min-height: 0;      /* Verhindert den Höhen-Kollaps */
+  overflow-y: scroll; /* Erzwingt die native vertikale Scrollbar */
+  overflow-x: hidden;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  
+  /* GPU Hardware-Beschleunigung für butterweiches Scrollen mit Blur-Effekt */
+  will-change: transform;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --- Custom Scrollbar Styling --- */
 #output-list::-webkit-scrollbar,
 .output-list::-webkit-scrollbar {
   width: 6px;
@@ -188,7 +201,7 @@ textarea:focus {
   background: var(--neon-pink);
 }
 
-/* --- Cards --- */
+/* --- Font Output Cards --- */
 .output-card {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -203,7 +216,7 @@ textarea:focus {
 .output-card:hover {
   background: rgba(161, 0, 255, 0.05);
   border-color: rgba(161, 0, 255, 0.3);
-  transform: translateX(2px); /* Eleganter Hover-Slide-Effekt */
+  transform: translateX(2px); /* Interaktives Feedback */
 }
 
 .font-info {
@@ -225,7 +238,7 @@ textarea:focus {
   word-break: break-all;
 }
 
-/* --- Buttons --- */
+/* --- Action Buttons --- */
 .copy-btn {
   background: transparent;
   border: 1px solid var(--neon-pink);
