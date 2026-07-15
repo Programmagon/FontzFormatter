@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const textInput = document.getElementById('text-input');
   const outputList = document.getElementById('output-list');
 
- // Friendly names for the display UI
+  // Friendly names for the display UI
   const styleNames = {
     bold: 'Bold Serif',
     italic: 'Italic Serif',
@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Handle live conversion
   function updateConversion() {
+    // Wenn kein Text da ist, zeigen wir den Cyberpunk-Platzhalter an
     const text = textInput.value || 'Type something...';
     const styles = UnicodeLibrary.getStyles();
 
@@ -79,8 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Global scope binding for inline button action
   window.copyResult = (style) => {
+    // Falls der Input leer ist, kopieren wir nichts (verhindert das Kopieren von "Type something...")
+    if (!textInput.value.trim()) {
+      return; 
+    }
+
     const element = document.getElementById(`res-${style}`);
-    const button = element.closest('.output-card').querySelector('.copy-btn');
+    const card = element.closest('.output-card');
+    const button = card.querySelector('.copy-btn');
     
     if (element && element.textContent) {
       navigator.clipboard.writeText(element.textContent).then(() => {
@@ -92,6 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
           button.textContent = 'COPY';
           button.classList.remove('copied');
         }, 1500);
+      }).catch(err => {
+        console.error('Copy failed: ', err);
       });
     }
   };
