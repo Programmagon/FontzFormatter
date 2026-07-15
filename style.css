@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CYBER_FONT // ULTIMATE UNICODE CONVERTER STYLESHEET
+   CYBER_FONT // ULTIMATE UNICODE CONVERTER STYLESHEET (FIXED SCROLLING)
    ========================================================================== */
 
 /* Theme Variables */
@@ -22,36 +22,33 @@
   font-family: 'Courier New', Courier, monospace;
 }
 
-/* --- App Layout & Scroll-Control --- */
+/* --- Globales Scrollen erlauben (Extrem robust) --- */
 html, body {
-  height: 100vh;
-  width: 100vw;
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* Verhindert das globale Scrollen der Hintergrundseite */
+  min-height: 100vh;
+  width: 100%;
   background-color: var(--bg-color);
   color: var(--text-primary);
+  /* Wir erlauben das normale, flüssige Scrollen der gesamten Seite */
+  overflow-y: auto; 
+  overflow-x: hidden;
 }
 
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; /* Startet oben, damit man nach unten scrollen kann */
+  padding: 40px 15px; /* Abstand oben/unten und an den Seiten */
   position: relative;
 }
 
-/* Zentraler Container (90% der Bildschirmhöhe) */
+/* Zentraler Container wächst natürlich mit seinem Inhalt */
 .container {
   width: 100%;
   max-width: 800px;
-  height: 90vh; 
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
   z-index: 1;
 }
 
-/* Das Glassmorphism-Panel (hält alles fest umschlossen) */
+/* Das Glassmorphism-Panel dehnt sich automatisch aus */
 .glass-panel {
   background: var(--panel-bg);
   backdrop-filter: blur(15px);
@@ -65,14 +62,19 @@ body {
   
   display: flex;
   flex-direction: column;
-  height: 100%;       /* Füllt den Container komplett aus */
-  min-height: 0;      /* Zwingt Flex-Kinder im Browser dazu, schrumpfen zu können */
-  overflow: hidden;   /* Schützt das Panel vor Ausbrüchen */
+  height: auto; /* Wächst mit den Cards mit */
 }
 
-/* Verhindert, dass Header und Input zusammengedrückt werden */
-header, .input-group {
-  flex-shrink: 0;
+/* --- UNICODE LISTE (Kein eigenes Scrollen mehr!) --- */
+#output-list, .output-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+  
+  /* Das innere Scrollen wird komplett abgeschaltet, um Konflikte zu vermeiden */
+  max-height: none !important; 
+  overflow: visible !important; 
 }
 
 /* --- Animated Cyberpunk Background --- */
@@ -107,7 +109,7 @@ header, .input-group {
 /* --- Header & Branding --- */
 header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .neon-text {
@@ -133,7 +135,7 @@ header {
 
 /* --- Input Elements --- */
 .input-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .cyber-label {
@@ -164,40 +166,18 @@ textarea:focus {
   box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
 }
 
-/* --- SCROLL-CONTAINER (The Magic Fix) --- */
-#output-list, .output-list {
-  flex: 1;            /* Nutzt den kompletten restlichen Platz im Panel */
-  min-height: 0;      /* Verhindert den Höhen-Kollaps */
-  overflow-y: scroll; /* Erzwingt die native vertikale Scrollbar */
-  overflow-x: hidden;
-  padding-right: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  
-  /* GPU Hardware-Beschleunigung für butterweiches Scrollen mit Blur-Effekt */
-  will-change: transform;
-  -webkit-overflow-scrolling: touch;
+/* --- Globale Scrollbar für die gesamte Website --- */
+::-webkit-scrollbar {
+  width: 8px;
 }
-
-/* --- Custom Scrollbar Styling --- */
-#output-list::-webkit-scrollbar,
-.output-list::-webkit-scrollbar {
-  width: 6px;
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
 }
-#output-list::-webkit-scrollbar-track,
-.output-list::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-}
-#output-list::-webkit-scrollbar-thumb,
-.output-list::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: var(--neon-purple);
-  border-radius: 3px;
-  border: 1px solid var(--bg-color);
+  border-radius: 4px;
 }
-#output-list::-webkit-scrollbar-thumb:hover,
-.output-list::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
   background: var(--neon-pink);
 }
 
@@ -216,7 +196,7 @@ textarea:focus {
 .output-card:hover {
   background: rgba(161, 0, 255, 0.05);
   border-color: rgba(161, 0, 255, 0.3);
-  transform: translateX(2px); /* Interaktives Feedback */
+  transform: translateX(3px); /* Tolles haptisches Feedback beim Hovern */
 }
 
 .font-info {
