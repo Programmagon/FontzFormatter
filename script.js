@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const outputList = document.getElementById('output-list');
 
   // Friendly names for the display UI
-  // Friendly names for the display UI
   const styleNames = {
     bold: 'Bold Serif',
     italic: 'Italic Serif',
