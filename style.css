@@ -16,30 +16,67 @@
   padding: 0;
   font-family: 'Courier New', Courier, monospace;
 }
-/* 1. Erlaube der Seite, unendlich lang zu werden */
-html, body {
-  min-height: 100%;
-  overflow-y: auto; /* Scrollen auf der Hauptseite erlauben */
-}
 
-/* 2. Deaktiviere das eigene Scrollen der Liste komplett */
-#output-list {
-  max-height: none !important; /* Entfernt eventuelle Höhenbegrenzungen */
-  overflow: visible !important; /* Verhindert die zweite Scrollbar */
+/* --- Layout & Scroll-Control (App-Look) --- */
+html, body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* Verhindert das Scrollen der gesamten Seite */
+  background-color: var(--bg-color);
+  color: var(--text-primary);
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-x: hidden;
-  position: relative;
 }
 
-/* Background grid & scanline details */
+/* Zentraler Container, der sich perfekt einpasst */
+.container {
+  width: 100%;
+  max-width: 800px;
+  height: 95vh; /* Lässt oben und unten etwas Luft */
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  z-index: 1;
+}
+
+/* Die Glass-Panel umschließt alles und wächst dynamisch */
+.glass-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    inset 0 0 20px rgba(161, 0, 255, 0.1);
+  
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Füllt die Container-Höhe aus */
+  overflow: hidden; /* Verhindert, dass das Panel selbst ausbricht */
+}
+
+/* --- Scrollbarer Output-Bereich --- */
+#output-list, .output-list {
+  flex: 1;                /* Nutzt den gesamten restlichen Platz im Glaskasten */
+  overflow-y: auto;       /* NUR HIER wird gescrollt */
+  overflow-x: hidden;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  
+  /* Performance-Boost für ruckelfreies Scrollen mit blur-Effekt */
+  will-change: transform;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* --- Background details --- */
 .cyber-bg {
   position: fixed;
   top: 0;
@@ -68,38 +105,15 @@ body {
   pointer-events: none;
 }
 
-/* 1. Verhindere, dass die ganze Seite scrollt */
-html, body {
-  height: 100vh;
-  margin: 0;
-  overflow: hidden; /* Sperrt das globale Scrollen */
-  display: flex;
-  flex-direction: column;
-}
-
-/* 2. Falls du einen Wrapper/Container hast, zwinge ihn auf die volle Höhe */
-.container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  box-sizing: border-box;
-}
-
-/* 3. Lass nur die Output-Liste scrollen */
-#output-list {
-  flex: 1; /* Nimmt den restlichen Platz ein */
-  overflow-y: auto; /* Aktiviert das Scrollen nur hier */
-  padding-right: 10px; /* Platz für den Scrollbalken */
-}
-
+/* --- Header & Typography --- */
 header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  flex-shrink: 0; /* Header darf nicht schrumpfen */
 }
 
 .neon-text {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 900;
   letter-spacing: 5px;
   color: #fff;
@@ -112,42 +126,31 @@ header {
 }
 
 .subtitle {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--neon-cyan);
   letter-spacing: 2px;
-  margin-top: 10px;
+  margin-top: 5px;
   text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
 }
 
-/* Glassmorphism card styling */
-.glass-panel {
-  background: var(--panel-bg);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 
-    0 8px 32px 0 rgba(0, 0, 0, 0.37),
-    inset 0 0 20px rgba(161, 0, 255, 0.1);
+/* --- Inputs --- */
+.input-group {
+  margin-bottom: 20px;
+  flex-shrink: 0; /* Input-Bereich darf nicht schrumpfen */
 }
 
 .cyber-label {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--neon-pink);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   letter-spacing: 1px;
   font-weight: bold;
 }
 
-.input-group {
-  margin-bottom: 30px;
-}
-
 textarea {
   width: 100%;
-  height: 120px;
+  height: 100px;
   background: rgba(0, 0, 0, 0.4);
   border: 1px solid var(--neon-purple);
   border-radius: 6px;
@@ -164,28 +167,28 @@ textarea:focus {
   box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
 }
 
-/* Dynamic output block formatting */
-.output-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  max-height: 400px;
-  overflow-y: auto;
-  padding-right: 5px;
-}
-
-/* Custom scrollbar */
+/* --- Custom Scrollbar --- */
+#output-list::-webkit-scrollbar,
 .output-list::-webkit-scrollbar {
   width: 6px;
 }
+#output-list::-webkit-scrollbar-track,
 .output-list::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }
+#output-list::-webkit-scrollbar-thumb,
 .output-list::-webkit-scrollbar-thumb {
   background: var(--neon-purple);
   border-radius: 3px;
+  border: 1px solid var(--bg-color);
+}
+#output-list::-webkit-scrollbar-thumb:hover,
+.output-list::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-pink);
 }
 
+/* --- Cards --- */
 .output-card {
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -200,6 +203,7 @@ textarea:focus {
 .output-card:hover {
   background: rgba(161, 0, 255, 0.05);
   border-color: rgba(161, 0, 255, 0.3);
+  transform: translateX(2px); /* Eleganter Hover-Slide-Effekt */
 }
 
 .font-info {
@@ -208,7 +212,7 @@ textarea:focus {
 }
 
 .font-name {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--text-dim);
   margin-bottom: 5px;
   text-transform: uppercase;
@@ -216,11 +220,12 @@ textarea:focus {
 }
 
 .font-result {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: #fff;
   word-break: break-all;
 }
 
+/* --- Buttons --- */
 .copy-btn {
   background: transparent;
   border: 1px solid var(--neon-pink);
@@ -230,7 +235,8 @@ textarea:focus {
   cursor: pointer;
   font-weight: bold;
   font-size: 0.8rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .copy-btn:hover {
@@ -245,7 +251,7 @@ textarea:focus {
   box-shadow: 0 0 10px var(--neon-cyan);
 }
 
-/* Animations */
+/* --- Animations --- */
 @keyframes flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
     text-shadow: 
