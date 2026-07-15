@@ -1,0 +1,231 @@
+/* Custom properties for the theme */
+:root {
+  --bg-color: #080312;
+  --panel-bg: rgba(13, 6, 28, 0.45);
+  --glass-border: rgba(255, 0, 127, 0.15);
+  --neon-pink: #ff007f;
+  --neon-purple: #a100ff;
+  --neon-cyan: #00f0ff;
+  --text-primary: #f0ecf4;
+  --text-dim: #8b7ca2;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background grid & scanline details */
+.cyber-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-image: 
+    linear-gradient(rgba(161, 0, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(161, 0, 255, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(
+    rgba(18, 10, 36, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  z-index: 10;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.neon-text {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 5px;
+  color: #fff;
+  text-shadow: 
+    0 0 5px #fff,
+    0 0 10px var(--neon-pink),
+    0 0 20px var(--neon-pink),
+    0 0 40px var(--neon-purple);
+  animation: flicker 3s infinite alternate;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: var(--neon-cyan);
+  letter-spacing: 2px;
+  margin-top: 10px;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+/* Glassmorphism card styling */
+.glass-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    inset 0 0 20px rgba(161, 0, 255, 0.1);
+}
+
+.cyber-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--neon-pink);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.input-group {
+  margin-bottom: 30px;
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--neon-purple);
+  border-radius: 6px;
+  padding: 15px;
+  color: #fff;
+  font-size: 1.1rem;
+  resize: none;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+textarea:focus {
+  border-color: var(--neon-pink);
+  box-shadow: 0 0 15px rgba(255, 0, 127, 0.3);
+}
+
+/* Dynamic output block formatting */
+.output-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* Custom scrollbar */
+.output-list::-webkit-scrollbar {
+  width: 6px;
+}
+.output-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+.output-list::-webkit-scrollbar-thumb {
+  background: var(--neon-purple);
+  border-radius: 3px;
+}
+
+.output-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.output-card:hover {
+  background: rgba(161, 0, 255, 0.05);
+  border-color: rgba(161, 0, 255, 0.3);
+}
+
+.font-info {
+  flex-grow: 1;
+  padding-right: 15px;
+}
+
+.font-name {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.font-result {
+  font-size: 1.25rem;
+  color: #fff;
+  word-break: break-all;
+}
+
+.copy-btn {
+  background: transparent;
+  border: 1px solid var(--neon-pink);
+  color: var(--neon-pink);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+  background: var(--neon-pink);
+  color: #fff;
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+
+.copy-btn.copied {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* Animations */
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 
+      0 0 5px #fff,
+      0 0 10px var(--neon-pink),
+      0 0 20px var(--neon-pink),
+      0 0 40px var(--neon-purple);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
