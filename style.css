@@ -57,11 +57,29 @@ body {
   pointer-events: none;
 }
 
+/* 1. Verhindere, dass die ganze Seite scrollt */
+html, body {
+  height: 100vh;
+  margin: 0;
+  overflow: hidden; /* Sperrt das globale Scrollen */
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. Falls du einen Wrapper/Container hast, zwinge ihn auf die volle Höhe */
 .container {
-  width: 100%;
-  max-width: 800px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
-  z-index: 10;
+  box-sizing: border-box;
+}
+
+/* 3. Lass nur die Output-Liste scrollen */
+#output-list {
+  flex: 1; /* Nimmt den restlichen Platz ein */
+  overflow-y: auto; /* Aktiviert das Scrollen nur hier */
+  padding-right: 10px; /* Platz für den Scrollbalken */
 }
 
 header {
