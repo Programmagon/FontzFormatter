@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const textInput = document.getElementById('text-input');
   const outputList = document.getElementById('output-list');
 
-  // Friendly names for the display UI
+ // Friendly names for the display UI
   const styleNames = {
     bold: 'Bold Serif',
     italic: 'Italic Serif',
@@ -17,14 +17,30 @@ document.addEventListener('DOMContentLoaded', () => {
     sansItalic: 'Italic Sans-Serif',
     sansBoldItalic: 'Bold Italic Sans-Serif',
     monospace: 'Monospace',
+    
+    // Custom Pseudo-Fonts
     vaporwave: 'V A P O R W A V E',
     squared: 'Squared Outline',
+    squaredDark: 'Squared Solid',
     circledDark: 'Dark Circles',
     circledLight: 'Light Circles',
+    parenthesized: 'Parentheses',
     smallCaps: 'Small Caps',
     upsideDown: 'Upside Down',
+    fauxAsian: 'Neo-Tokyo // Faux Kanji',
+    fauxCyrillic: 'Soviet // Faux Cyrillic',
+    runic: 'Ancient // Runic',
+    currency: 'Corpo // Currency',
+    curly: 'Alien // Horned',
+    demonic: 'Cultist // Demonic',
+    leetspeak: 'H4ck3r // Leetspeak',
+    superscript: 'Superscript / Tiny',
+    
+    // Dynamic Modifiers
     glitch: 'C O R R U P T E D // GLITCH',
-    fauxAsian: 'Neo-Tokyo // Faux Kanji'
+    strikethrough: 'Censored // Strikethrough',
+    underline: 'Data-Link // Underline',
+    slash: 'Terminated // Slashed'
   };
 
   // Build output card elements
