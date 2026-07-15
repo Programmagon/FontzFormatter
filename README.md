@@ -1,3 +1,3 @@
 # FontFormatter
 
-[Here](https://font-formatter.vercel.app/) avaiable to use. 
+[Here](https://font-formatter.vercel.app/) avaible to use. 
