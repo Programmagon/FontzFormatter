@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
     circledLight: 'Light Circles',
     smallCaps: 'Small Caps',
     upsideDown: 'Upside Down',
-    glitch: 'C O R R U P T E D // GLITCH'
+    glitch: 'C O R R U P T E D // GLITCH',
+    fauxAsian: 'Neo-Tokyo // Faux Kanji'
   };
 
   // Build output card elements
