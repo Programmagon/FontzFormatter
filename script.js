@@ -43,9 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
     slash: 'Terminated // Slashed'
   };
 
-  // Build output card elements
+  /**
+   * Generiert die Ausgabekarten einmalig im DOM
+   */
   function createOutputCards() {
-    outputList.innerHTML = '';
+    // DocumentFragment minimiert DOM-Reflows und beschleunigt das Laden massiv
+    const fragment = document.createDocumentFragment();
     const styles = UnicodeLibrary.getStyles();
 
     styles.forEach(style => {
@@ -58,15 +61,20 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="font-name">${styleNames[style] || style}</div>
           <div class="font-result" id="res-${style}">...</div>
         </div>
-        <button class="copy-btn" onclick="copyResult('${style}')">COPY</button>
+        <button class="copy-btn">COPY</button>
       `;
-      outputList.appendChild(card);
+      
+      fragment.appendChild(card);
     });
+
+    outputList.innerHTML = '';
+    outputList.appendChild(fragment);
   }
 
-  // Handle live conversion
+  /**
+   * Führt die Live-Konvertierung durch
+   */
   function updateConversion() {
-    // Wenn kein Text da ist, zeigen wir den Cyberpunk-Platzhalter an
     const text = textInput.value || 'Type something...';
     const styles = UnicodeLibrary.getStyles();
 
@@ -78,37 +86,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Global scope binding for inline button action
-  window.copyResult = (style) => {
-    // Falls der Input leer ist, kopieren wir nichts (verhindert das Kopieren von "Type something...")
-    if (!textInput.value.trim()) {
-      return; 
-    }
+  /**
+   * Event Delegation für den Copy-Button.
+   * Verhindert das Zumüllen des globalen Window-Scopes.
+   */
+  outputList.addEventListener('click', (event) => {
+    const button = event.target.closest('.copy-btn');
+    if (!button) return; // Klick war nicht auf einem Button
 
+    // Wenn kein Text eingegeben wurde, kopieren wir nichts
+    if (!textInput.value.trim()) return;
+
+    const card = button.closest('.output-card');
+    const style = card.dataset.style;
     const element = document.getElementById(`res-${style}`);
-    const card = element.closest('.output-card');
-    const button = card.querySelector('.copy-btn');
     
     if (element && element.textContent) {
-      navigator.clipboard.writeText(element.textContent).then(() => {
-        button.textContent = 'COPIED!';
-        button.classList.add('copied');
-        
-        // Reset state after 1.5 seconds
-        setTimeout(() => {
-          button.textContent = 'COPY';
-          button.classList.remove('copied');
-        }, 1500);
-      }).catch(err => {
-        console.error('Copy failed: ', err);
-      });
+      navigator.clipboard.writeText(element.textContent)
+        .then(() => {
+          // Visuelles Feedback
+          button.textContent = 'COPIED!';
+          button.classList.add('copied');
+          
+          // Reset nach 1,5 Sekunden
+          setTimeout(() => {
+            button.textContent = 'COPY';
+            button.classList.remove('copied');
+          }, 1500);
+        })
+        .catch(err => {
+          console.error('Copy failed: ', err);
+        });
     }
-  };
+  });
 
-  // Attach event listener
+  // Event Listener für Live-Eingabe
   textInput.addEventListener('input', updateConversion);
 
-  // Initialize
+  // Initialisierung
   createOutputCards();
   updateConversion();
 });
