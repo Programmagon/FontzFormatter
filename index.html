@@ -3,12 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Passt die Farbe der Browser-Kopfzeile auf Handys an unser dunkles Theme an -->
+  <meta name="theme-color" content="#080312"> 
+  
   <title>// 𝔽𝕆ℕ𝕋ℤ // Unicode Formatter //</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="cyber-bg"></div>
-  <div class="scanlines"></div>
+  <!-- Visuelle Hintergrundeffekte (für Screenreader unsichtbar gemacht) -->
+  <div class="cyber-bg" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
 
   <div class="container">
     <header>
@@ -17,19 +21,23 @@
     </header>
 
     <main class="glass-panel">
-      <div class="input-group">
+      <!-- Eingabebereich -->
+      <section class="input-group">
         <label for="text-input" class="cyber-label">INPUT_STRING_</label>
-        <textarea id="text-input" placeholder="Type your text here to translate..."></textarea>
-      </div>
+        <!-- spellcheck="false" verhindert die hässlichen roten Fehler-Linien beim Tippen -->
+        <textarea id="text-input" placeholder="Type your text here to translate..." spellcheck="false" autofocus></textarea>
+      </section>
 
-      <div class="output-section">
+      <!-- Ausgabebereich -->
+      <section class="output-section">
         <h2 class="cyber-label">CONVERTED_OUTPUTS_</h2>
-        <div id="output-list" class="output-list">
-          </div>
-      </div>
+        <!-- Die Liste wird von script.js dynamisch gefüllt -->
+        <div id="output-list" class="output-list"></div>
+      </section>
     </main>
   </div>
 
+  <!-- Skripte -->
   <script src="unicode-library.js"></script>
   <script src="script.js"></script>
 </body>
