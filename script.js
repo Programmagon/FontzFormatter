@@ -40,7 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
     glitch: 'C O R R U P T E D // GLITCH',
     strikethrough: 'Censored // Strikethrough',
     underline: 'Data-Link // Underline',
-    slash: 'Terminated // Slashed'
+    slash: 'Terminated // Slashed',
+
+    // Füge das einfach zu deiner bestehenden styleNames-Liste in script.js hinzu:
+    subscript: 'Subscript / Tiny Low',
+    bubble: 'Cyber Bubble / O-Rings',
+    gothic: 'Medieval // Gothic',
+    mirror: 'Reflected // Mirror-State'
   };
 
   /**
