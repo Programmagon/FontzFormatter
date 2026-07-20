@@ -1,5 +1,5 @@
 /**
- * CYBER_FONT // ULTIMATE UNICODE LIBRARY (COMPLETE VERSION)
+ * CYBER_FONT // ULTIMATE UNICODE LIBRARY (OPTIMIZED & EXPANDED)
  * Core mapping protocol for multi-layered text translation.
  */
 const UnicodeLibrary = (() => {
@@ -35,28 +35,50 @@ const UnicodeLibrary = (() => {
     fauxCyrillic: "ДБCДЄFGHИJКLMNФPQRSTЦVWXYZдбcдєfghиjкlmnфpqrstцvwxyz０１２３４５６７８９",
     runic: "ᚫᛒᚳᛞᛖᚠᚷᚻᛁᛃᚲᛚᛗᚾᚩᛈᛩᚱᛋᛏᚢᚡᚹᛪᚣᛉᚫᛒᚳᛞᛖᚠᚷᚻᛁᛃᚲᛚᛗᚾᚩᛈᛩᚱᛋᛏᚢᚡᚹᛪᚣᛉ０１２３４５６７８９",
     currency: "₳฿₵Đ€₣₲ⱧłJ₭Ⱡ₥₦Ø₱QⱤ₴₮ɄV₩ӾҰZ₳฿₵đ€₣₲Ⱨłj₭Ⱡ₥₦ø₱qⱤ₴₮ʉv₩ӿ¥z０１２３４５６７８９",
-    curly: "ǟɮƈɖɛʄɢɦɨʝӄʟʍռօքզʀֆȶʊʋաӼʏʐǟɮƈɖɛʄɢɦɨʝӄʟʍռօքզʀֆȶʊʋաӼʏʐ０１２３４５６７８９",
+    curly: "ǟɮƈɖɛʄɢɦɨʝӄʟʍռօքզʀֆȶʊʋաӼʏʐǟɮƈɖɛʄɢɦɨʝӄʟʍռօքզʀֆȶʊʋաӼʏʐ０１２３４5６７８９",
     demonic: "ค๒૮๔ﻉिﻭɦٱﻝᛕɭ๓กѻρ۹ɼรՇપ۷ฝซץչค๒૮๔ﻉिﻭɦٱﻝᛕɭ๓กѻρ۹ɼรՇપ۷ฝซץչ０１２３４５６７８９",
     leetspeak: "48CD3F6H1JKLMN0PQR57UVWXYZ48cd3f6h1jklmn0pqr57uvwxyz0123456789",
-    superscript: "ᴬᴮᶜᴰᴱᶠᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾQᴿˢᵀᵁⱽᵂˣʸᶻᵃᵇᶜᵈᵉᶠᵍʰᶦʲᵏˡᵐⁿᵒᵖᑫʳˢᵗᵘᵛʷˣʸᶻ⁰¹²³⁴⁵⁶⁷⁸⁹"
+    superscript: "ᴬᴮᶜᴰᴱᶠᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾQᴿˢᵀᵁⱽᵂˣʸᶻᵃᵇᶜᵈᵉᶠᵍʰᶦʲᵏˡᵐⁿᵒᵖᑫʳˢᵗᵘᵛʷˣʸᶻ⁰¹²³⁴⁵⁶⁷⁸⁹",
+    
+    // --- NEUE STYLES ---
+    subscript: "₳₰₵仕₠𝣿𝐺ₕⅠ𝙅𝔎ℒₘ𝓝𝓞𝓤𝓠𝑅ₛ𝒯ᵤᵥ𝒲𝔛𝒴𝘡ₐᵦ꜀ₔₑ𝘓gₕᵢⱼₖₗₘₙₒₚ𝘲ᵣₛₜᵤᵥ𝓌ₓᵧ𝓏₀₁₂₃₄₅₆₇₈₉",
+    bubble: "ⒶⒷⒸⒹⒺⒻⒼⒽⒾⒿⓀⓁⓂⓃⓄⓅⓆⓇⓈⓉⓊⓋⓌⓍⓎⓏⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ①②③④⑤⑥⑦⑧⑨⓪",
+    gothic: "𝔄𝔅𝔖𝔇𝔈𝔉𝔊 somethings ℑ𝔍𝔎𝔏𝔐running𝔒𝔓𝔔𝔖𝔖𝔗𝔘𝔙𝔚𝔛𝔜frame𝔞𝔟𝔳𝔡𝔢𝔣𝔤𝔥𝔦𝔟𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷０１２３４５６７８９",
+    mirror: "A𐌑ƆDƎ𐌕GHI𐌋K⅃M𐌝Oꟼ𐌡ЯꞄ𐌕U𐌿W𐌘Y𐌏AᙓƆDƎꟻGHI𐌋K⅃M𐌝Oꟼ𐌡ЯꞄ𐌕U𐌿W𐌘Y𐌏0123456789"
   };
 
   const standardChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-  // --- Dynamic Modifier Functions (Zalgo, Strikethrough, Underline, Slash) ---
+  // Pre-compiled Array cache for high-speed dictionary translation
+  const compiledCharMaps = {};
+  for (const [key, val] of Object.entries(charMaps)) {
+    compiledCharMaps[key] = Array.from(val);
+  }
+
+  // --- Dynamic Modifier Functions ---
   function applyGlitch(text) {
     const glitchMarks = ['\u0300','\u0301','\u0302','\u0303','\u0304','\u0305','\u0306','\u0307','\u0308','\u0309','\u030A','\u030B','\u030C','\u030D','\u030E','\u030F','\u0310','\u0311','\u0312','\u0313','\u0314','\u0315','\u0316','\u0317','\u0318','\u0319','\u031A','\u031B','\u031C','\u031D','\u031E','\u031F'];
-    return text.split('').map(char => {
-      if (char === ' ') return char;
+    let result = '';
+    for (const char of text) {
+      if (char === ' ') {
+        result += ' ';
+        continue;
+      }
+      result += char;
       const numMarks = Math.floor(Math.random() * 4);
-      let glitched = char;
-      for (let i = 0; i < numMarks; i++) glitched += glitchMarks[Math.floor(Math.random() * glitchMarks.length)];
-      return glitched;
-    }).join('');
+      for (let i = 0; i < numMarks; i++) {
+        result += glitchMarks[Math.floor(Math.random() * glitchMarks.length)];
+      }
+    }
+    return result;
   }
 
   function applyCombiningChar(text, combiningChar) {
-    return text.split('').map(char => char === ' ' ? char : char + combiningChar).join('');
+    let result = '';
+    for (const char of text) {
+      result += (char === ' ') ? ' ' : (char + combiningChar);
+    }
+    return result;
   }
 
   // --- Core Translators ---
@@ -69,32 +91,39 @@ const UnicodeLibrary = (() => {
     return char;
   }
 
-  function convertMappedChar(char, mapString) {
+  function convertMappedChar(char, compiledArray) {
     const index = standardChars.indexOf(char);
-    if (index !== -1) {
-        const array = Array.from(mapString); 
-        return array[index] || char;
-    }
-    return char;
+    return index !== -1 ? (compiledArray[index] || char) : char;
   }
 
   // Main translation orchestrator
   function translate(text, style) {
-    // Check dynamic modifiers first
+    if (!text) return '';
+
+    // 1. Check combining modifiers
     if (style === 'glitch') return applyGlitch(text);
     if (style === 'strikethrough') return applyCombiningChar(text, '\u0336');
     if (style === 'underline') return applyCombiningChar(text, '\u0332');
     if (style === 'slash') return applyCombiningChar(text, '\u0338');
 
-    // Check Math Offset Blocks
+    // 2. Check Math Offset Blocks
     if (offsetMaps[style]) {
-      return text.split('').map(char => convertOffsetChar(char, offsetMaps[style])).join('');
+      let result = '';
+      for (const char of text) {
+        result += convertOffsetChar(char, offsetMaps[style]);
+      }
+      return result;
     }
 
-    // Check Custom Dictionary Blocks
-    if (charMaps[style]) {
-      let result = text.split('').map(char => convertMappedChar(char, charMaps[style])).join('');
-      if (style === 'upsideDown') result = result.split('').reverse().join('');
+    // 3. Check Custom Dictionary Blocks
+    if (compiledCharMaps[style]) {
+      let result = '';
+      for (const char of text) {
+        result += convertMappedChar(char, compiledCharMaps[style]);
+      }
+      if (style === 'upsideDown') {
+        result = Array.from(result).reverse().join('');
+      }
       return result;
     }
 
@@ -105,7 +134,7 @@ const UnicodeLibrary = (() => {
     translate,
     getStyles: () => [
       ...Object.keys(offsetMaps), 
-      ...Object.keys(charMaps), 
+      ...Object.keys(compiledCharMaps), 
       'glitch', 'strikethrough', 'underline', 'slash'
     ]
   };
